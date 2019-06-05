@@ -52,4 +52,15 @@ public class TokensSquares {
         return -1;
     }
 
+    public boolean gameIsOver() {
+        for (int aPlayer = 0; aPlayer < 4; aPlayer++) {
+            for (int aToken = 0; aToken < 4; aToken++) {
+                if (this.tokenSq[aPlayer][aToken].square < 76) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
