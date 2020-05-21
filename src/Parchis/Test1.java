@@ -10,7 +10,7 @@ public class Test1 {
         for (int round = 1; round < i; round++) {
             System.out.println("Round " + round);
             for (int player = 0; player < 4; player++) {
-                sleep(500);
+                sleep(200);
                 tokenToMove = randToken.nextInt(4);
                 steps = myDice.roll();
                 tokenSquares.moveToken(player, tokenToMove, steps);
@@ -38,6 +38,6 @@ public class Test1 {
         Test1 myTest1 = new Test1();
 //        MainBoard myBoard = new MainBoard();
 //        myBoard.setVisible(true);
-        myTest1.selfPlay(8);
+        myTest1.selfPlay(100);
     }
 }

@@ -1,6 +1,7 @@
 package Parchis;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
@@ -57,7 +58,9 @@ public class MainBoard extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
         jPanel2.setForeground(new java.awt.Color(204, 255, 0));
-        jPanel2.setPreferredSize(new java.awt.Dimension(120, 600));
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setAlignmentY(0.0F);
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +73,7 @@ public class MainBoard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -126,6 +129,7 @@ public class MainBoard extends javax.swing.JFrame {
     private TokensSquares tokenSquare;//Number of the square/subsquare in which each token is.
 
     private void initCustomComponents() {
+        this.setIconImage(new ImageIcon(getClass().getResource("/Images/600px-Parchís.svg.png")).getImage());
         tokenSquare = new TokensSquares();//All token are at their starting square.
         for (int player = 0; player < 4; player++) {
             for (int aToken = 0; aToken < 4; aToken++) {
@@ -155,14 +159,14 @@ public class MainBoard extends javax.swing.JFrame {
             case 0://0->yellow
                 token[player][aToken].setIcon(yellowIcon); // NOI18N
                 break;
-            case 1://1->green
-                token[player][aToken].setIcon(greenIcon); // NOI18N
+            case 1://1->blue
+                token[player][aToken].setIcon(blueIcon); // NOI18N
                 break;
             case 2://2->red
                 token[player][aToken].setIcon(redIcon); // NOI18N
                 break;
-            case 3://3->blue
-                token[player][aToken].setIcon(blueIcon); // NOI18N
+            case 3://3->green
+                token[player][aToken].setIcon(greenIcon); // NOI18N
                 break;
             default:
                 throw new AssertionError();
@@ -173,22 +177,20 @@ public class MainBoard extends javax.swing.JFrame {
 //Sets the Location of a token and sets its visibility to TRUE.
     private void showToken(int player, int aToken) {
         Point pos;
-        pos = calculateLocation(player, aToken);
+        pos = calculateCoordinates(player, aToken);
         //token[player][aToken].setVisible(false);
         token[player][aToken].setLocation(pos);
         token[player][aToken].setVisible(true);
 //        token[player][aToken].repaint();
 
-        System.out.println("pos token(" + player + " " + aToken + ")=" + token[player][aToken].getLocation().x + " " + token[player][aToken].getLocation().y);
+//        System.out.println("pos token(" + player + " " + aToken + ")=" + token[player][aToken].getLocation().x + " " + token[player][aToken].getLocation().y);
     }
 
 //Reads square and subsquare of a token in order to calculate where to draw it.
-    private Point calculateLocation(int player, int aToken) {
+    private Point calculateCoordinates(int player, int aToken) {
         Point pos;
         int square = tokenSquare.getSquare(player, aToken);
-        if (square > 76) {// should be 0<=square<77
-            square = square % 76;
-        } else if (square < 0) {
+        if (square < 0) {
             square = 0;
         }
         int subSquare = tokenSquare.getSubSquare(player, aToken);
@@ -198,32 +200,55 @@ public class MainBoard extends javax.swing.JFrame {
         subSquare = subSquare % 3;
 
         pos = calculatePosition(square, subSquare);
-        pos = adjustPerPlayer(pos, square, player);
         pos = adjustPerToken(pos, square, aToken);
+        pos = adjustPerPlayer(pos, square, player);
         pos = adustPerOffset(pos);
         return pos;
     }
 
-//Calculates que position (central coordinates) for a guiven square+subsquare.
+//Calculates the position (central coordinates) for a given square+subsquare.
     private Point calculatePosition(int square, int subSquare) {
         Point pos = new Point();
         int squareSub18 = ((square - 1) % 17) + 1;
         int dispX = 0, dispY = 0;
-        if (square == 76) {
+        //Finish square
+        if (Arrays.asList(76, 84, 92, 100).contains(square)) {
             dispX = 0;
             dispY = 35;
+            pos.translate(dispX, dispY);
+            pos = rotatePosition(pos, (square - 76) / 8);
+            return pos;
+            //Final corridors
         } else if (square > 68) {
-            dispX = 0 + 12 * (subSquare - 1);
-            dispY = 300 - borderSize - 14 - 28 * (square - 68);
-        } else if (squareSub18 == 0) {
+            //Yellow corridor
+            if (square < 77) {
+                dispX = 0 + 12 * (subSquare - 1);
+                dispY = 300 - borderSize - 14 - 28 * (square - 68);
+                //Blue corridor
+            } else if (square < 85) {
+                dispX = 300 - borderSize - 14 - 28 * (square - 76);
+                dispY = 0 - 12 * (subSquare - 1);
+                //Red corridor    
+            } else if (square < 93) {
+                dispX = 0 - 12 * (subSquare - 1);
+                dispY = -(300 - borderSize - 14 - 28 * (square - 84));
+                //Green corridor
+            } else {
+                dispX = -(300 - borderSize - 14 - 28 * (square - 92));
+                dispY = 0 + 12 * (subSquare - 1);
+            }
+            pos.translate(dispX, dispY);
+            return pos;
+
+            //Start squares
+        } else if (square == 0) {
             dispX = 195;
             dispY = 195;
-        } else if (squareSub18 == 8) {
-            dispX = 55 + 12 * (subSquare - 1);
-            dispY = 300 - borderSize - 14 - 28 * (squareSub18 - 1);
-
         } else if (squareSub18 < 8) {
             dispX = 65 + 12 * (subSquare - 1);
+            dispY = 300 - borderSize - 14 - 28 * (squareSub18 - 1);
+        } else if (squareSub18 == 8) {
+            dispX = 55 + 12 * (subSquare - 1);
             dispY = 300 - borderSize - 14 - 28 * (squareSub18 - 1);
 
         } else if (squareSub18 == 9) {
@@ -237,17 +262,16 @@ public class MainBoard extends javax.swing.JFrame {
             dispY = 0 + 12 * (subSquare - 1);
         }
         pos.translate(dispX, dispY);
-        pos = rotatePosition(pos, (4 - ((square - 1) / 17)) % 4);
+        pos = rotatePosition(pos, ((square - 1) / 17) % 4);
         return pos;
     }
 
-//Adjust coordinates depending of the player
+//Adjust coordinates depending on the player
     private Point adjustPerPlayer(Point pos1, int square, int player) {
-        if (square == 76) {
-            return rotatePosition(pos1, player);
-        } else if (square == 0) {
-            return rotatePosition(pos1, player);
-        } else if ((square > 68) & (square < 76)) {
+//        if (Arrays.asList(76, 84, 92, 100).contains(square)) {
+//            return rotatePosition(pos1, player);
+//        } else 
+        if (square == 0) {
             return rotatePosition(pos1, player);
         }
         return pos1;
@@ -256,7 +280,7 @@ public class MainBoard extends javax.swing.JFrame {
 //Adjust coordinates depending of the token
     private Point adjustPerToken(Point pos2, int square, int Token) {//Adjust the positions in starting and final squares 
         int dispX = 0, dispY = 0;
-        if (square == 76) {//In final square
+        if (Arrays.asList(76, 84, 92, 100).contains(square)) {//In final square
             pos2.translate(15 * ((Token - 2) % 2), 15 * ((1 - Token) % 2));
         } else if (square == 0) {//In starting square
             int disp2 = 45;
@@ -269,11 +293,16 @@ public class MainBoard extends javax.swing.JFrame {
 
 //Calculates coordinates after a rotation (central coordinates)
     private Point rotatePosition(Point previousPoint, int nRotations) {//Rotates the position nRotation times clockwise
-        int nRot = nRotations % 4;
-        return new Point(
-                previousPoint.x * ((1 - nRot) % 2) - previousPoint.y * ((2 - nRot) % 2),
-                previousPoint.x * ((2 - nRot) % 2) + (previousPoint.y * ((1 - nRot) % 2))
-        );
+        nRotations = nRotations % 4;
+        if (nRotations < 0) {
+            nRotations += 4;
+        }
+        Point newPoint = new Point();
+        for (int rot = 0; rot < nRotations; rot++) {
+            newPoint.setLocation(previousPoint.y, -previousPoint.x);
+            previousPoint.setLocation(newPoint);
+        }
+        return previousPoint;
     }
 
 //Adjusting coordinates for upper-left corner of the tokens and to canvas coordinates
@@ -295,8 +324,8 @@ public class MainBoard extends javax.swing.JFrame {
     }
 
     public void setTokenSquare(int player, int aToken) {
-        token[player][aToken].setLocation(calculateLocation(player, aToken));
-        System.out.println("pos token(" + player + " " + aToken + ")= sq" + tokenSquare.getSquare(player, aToken) + " ssq" + tokenSquare.getSubSquare(player, aToken) + " " + token[player][aToken].getLocation().x + " " + token[player][aToken].getLocation().y);
+        token[player][aToken].setLocation(calculateCoordinates(player, aToken));
+        //System.out.println("pos token(" + player + " " + aToken + ")= sq" + tokenSquare.getSquare(player, aToken) + " ssq" + tokenSquare.getSubSquare(player, aToken) + " " + token[player][aToken].getLocation().x + " " + token[player][aToken].getLocation().y);
 
     }
 

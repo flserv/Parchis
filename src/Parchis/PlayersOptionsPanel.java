@@ -5,17 +5,36 @@
  */
 package Parchis;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Paco
  */
 public class PlayersOptionsPanel extends javax.swing.JFrame {
 
+    boolean[] PlayerIsHuman;
+
     /**
      * Creates new form PlayersOptionsPanel
+     *
+     * @param PlayerIsHuman
      */
-    public PlayersOptionsPanel() {
+    public PlayersOptionsPanel(boolean[] PlayerIsHuman) {
         initComponents();
+        setLocationRelativeTo(null);
+        this.PlayerIsHuman = new boolean[4];
+        this.PlayerIsHuman = PlayerIsHuman;
+    }
+
+    private PlayersOptionsPanel() {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.PlayerIsHuman = new boolean[4];
+        for (boolean player : this.PlayerIsHuman) {
+            player = false;
+        }
+        //this.PlayerIsHuman={false,false,false,false};
     }
 
     /**
@@ -38,14 +57,14 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
         RBYellowHuman = new javax.swing.JRadioButton();
         RBYellowComputer = new javax.swing.JRadioButton();
         jPGreen = new javax.swing.JPanel();
-        RBGreenHuman1 = new javax.swing.JRadioButton();
-        RBGreenComputer1 = new javax.swing.JRadioButton();
+        RBGreenHuman = new javax.swing.JRadioButton();
+        RBGreenComputer = new javax.swing.JRadioButton();
         jPRed = new javax.swing.JPanel();
-        RBYellowHuman1 = new javax.swing.JRadioButton();
-        RBYellowComputer1 = new javax.swing.JRadioButton();
+        RBRedHuman = new javax.swing.JRadioButton();
+        RBRedComputer = new javax.swing.JRadioButton();
         jPBlue = new javax.swing.JPanel();
-        RBGreenHuman2 = new javax.swing.JRadioButton();
-        RBGreenComputer2 = new javax.swing.JRadioButton();
+        RBBlueHuman = new javax.swing.JRadioButton();
+        RBBlueComputer = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,7 +74,7 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jPYellow.setBackground(new java.awt.Color(255, 255, 51));
-        jPYellow.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Yellow", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPYellow.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Yellow", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPYellow.setLayout(new javax.swing.BoxLayout(jPYellow, javax.swing.BoxLayout.Y_AXIS));
 
         BGYellow.add(RBYellowHuman);
@@ -68,26 +87,28 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
         jPYellow.add(RBYellowComputer);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         jPanel1.add(jPYellow, gridBagConstraints);
 
         jPGreen.setBackground(new java.awt.Color(0, 153, 51));
-        jPGreen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Green", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPGreen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Green", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPGreen.setLayout(new javax.swing.BoxLayout(jPGreen, javax.swing.BoxLayout.Y_AXIS));
 
-        BGGreen.add(RBGreenHuman1);
-        RBGreenHuman1.setText("Human");
-        jPGreen.add(RBGreenHuman1);
+        BGGreen.add(RBGreenHuman);
+        RBGreenHuman.setText("Human");
+        jPGreen.add(RBGreenHuman);
 
-        BGGreen.add(RBGreenComputer1);
-        RBGreenComputer1.setSelected(true);
-        RBGreenComputer1.setText("Computer");
-        jPGreen.add(RBGreenComputer1);
+        BGGreen.add(RBGreenComputer);
+        RBGreenComputer.setSelected(true);
+        RBGreenComputer.setText("Computer");
+        jPGreen.add(RBGreenComputer);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         jPanel1.add(jPGreen, gridBagConstraints);
 
         jPRed.setBackground(new java.awt.Color(204, 0, 0));
@@ -95,36 +116,38 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
         jPRed.setForeground(new java.awt.Color(0, 0, 0));
         jPRed.setLayout(new javax.swing.BoxLayout(jPRed, javax.swing.BoxLayout.Y_AXIS));
 
-        BGRed.add(RBYellowHuman1);
-        RBYellowHuman1.setText("Human");
-        jPRed.add(RBYellowHuman1);
+        BGRed.add(RBRedHuman);
+        RBRedHuman.setText("Human");
+        jPRed.add(RBRedHuman);
 
-        BGRed.add(RBYellowComputer1);
-        RBYellowComputer1.setSelected(true);
-        RBYellowComputer1.setText("Computer");
-        jPRed.add(RBYellowComputer1);
+        BGRed.add(RBRedComputer);
+        RBRedComputer.setSelected(true);
+        RBRedComputer.setText("Computer");
+        jPRed.add(RBRedComputer);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         jPanel1.add(jPRed, gridBagConstraints);
 
         jPBlue.setBackground(new java.awt.Color(0, 153, 204));
-        jPBlue.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Blue", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPBlue.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Blue", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPBlue.setLayout(new javax.swing.BoxLayout(jPBlue, javax.swing.BoxLayout.Y_AXIS));
 
-        BGBlue.add(RBGreenHuman2);
-        RBGreenHuman2.setText("Human");
-        jPBlue.add(RBGreenHuman2);
+        BGBlue.add(RBBlueHuman);
+        RBBlueHuman.setText("Human");
+        jPBlue.add(RBBlueHuman);
 
-        BGBlue.add(RBGreenComputer2);
-        RBGreenComputer2.setSelected(true);
-        RBGreenComputer2.setText("Computer");
-        jPBlue.add(RBGreenComputer2);
+        BGBlue.add(RBBlueComputer);
+        RBBlueComputer.setSelected(true);
+        RBBlueComputer.setText("Computer");
+        jPBlue.add(RBBlueComputer);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         jPanel1.add(jPBlue, gridBagConstraints);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
@@ -174,6 +197,15 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.PlayerIsHuman[0] = RBYellowHuman.isSelected();
+        this.PlayerIsHuman[1] = RBGreenHuman.isSelected();
+        this.PlayerIsHuman[2] = RBRedHuman.isSelected();
+        this.PlayerIsHuman[3] = RBBlueHuman.isSelected();
+        System.out.println(Arrays.toString(this.PlayerIsHuman));
+        Parchis myGame = new Parchis(this.PlayerIsHuman);
+        this.dispose();
+        myGame.play();
+        //return PlayerIsHuman;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -207,6 +239,7 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new PlayersOptionsPanel().setVisible(true);
             }
         });
@@ -217,14 +250,14 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
     private javax.swing.ButtonGroup BGGreen;
     private javax.swing.ButtonGroup BGRed;
     private javax.swing.ButtonGroup BGYellow;
-    private javax.swing.JRadioButton RBGreenComputer1;
-    private javax.swing.JRadioButton RBGreenComputer2;
-    private javax.swing.JRadioButton RBGreenHuman1;
-    private javax.swing.JRadioButton RBGreenHuman2;
+    private javax.swing.JRadioButton RBBlueComputer;
+    private javax.swing.JRadioButton RBBlueHuman;
+    private javax.swing.JRadioButton RBGreenComputer;
+    private javax.swing.JRadioButton RBGreenHuman;
+    private javax.swing.JRadioButton RBRedComputer;
+    private javax.swing.JRadioButton RBRedHuman;
     private javax.swing.JRadioButton RBYellowComputer;
-    private javax.swing.JRadioButton RBYellowComputer1;
     private javax.swing.JRadioButton RBYellowHuman;
-    private javax.swing.JRadioButton RBYellowHuman1;
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPBlue;
@@ -233,4 +266,9 @@ public class PlayersOptionsPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPYellow;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    boolean[] getPlayerIsHuman() {
+        return PlayerIsHuman;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

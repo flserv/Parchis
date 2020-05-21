@@ -83,7 +83,7 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Yellow">
+                    <TitledBorder position="2" title="Yellow">
                       <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
                     </TitledBorder>
                   </Border>
@@ -91,7 +91,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="1" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="2" gridY="1" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
 
@@ -125,7 +125,7 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Green">
+                    <TitledBorder position="2" title="Green">
                       <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
                     </TitledBorder>
                   </Border>
@@ -133,7 +133,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="1" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
 
@@ -141,7 +141,7 @@
                 <Property name="axis" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="RBGreenHuman1">
+                <Component class="javax.swing.JRadioButton" name="RBGreenHuman">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGGreen"/>
@@ -149,7 +149,7 @@
                     <Property name="text" type="java.lang.String" value="Human"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="RBGreenComputer1">
+                <Component class="javax.swing.JRadioButton" name="RBGreenComputer">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGGreen"/>
@@ -178,7 +178,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="0" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
 
@@ -186,7 +186,7 @@
                 <Property name="axis" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="RBYellowHuman1">
+                <Component class="javax.swing.JRadioButton" name="RBRedHuman">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGRed"/>
@@ -194,7 +194,7 @@
                     <Property name="text" type="java.lang.String" value="Human"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="RBYellowComputer1">
+                <Component class="javax.swing.JRadioButton" name="RBRedComputer">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGRed"/>
@@ -212,7 +212,7 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Blue">
+                    <TitledBorder position="2" title="Blue">
                       <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
                     </TitledBorder>
                   </Border>
@@ -220,7 +220,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="2" gridY="0" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
 
@@ -228,7 +228,7 @@
                 <Property name="axis" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="RBGreenHuman2">
+                <Component class="javax.swing.JRadioButton" name="RBBlueHuman">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGBlue"/>
@@ -236,7 +236,7 @@
                     <Property name="text" type="java.lang.String" value="Human"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="RBGreenComputer2">
+                <Component class="javax.swing.JRadioButton" name="RBBlueComputer">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="BGBlue"/>
